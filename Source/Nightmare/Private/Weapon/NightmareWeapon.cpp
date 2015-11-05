@@ -3,24 +3,11 @@
 #include "Nightmare.h"
 #include "NightmarePawn.h"
 #include "NightmareWeapon.h"
-#include "PaperSpriteComponent.h"
 
 ANightmareWeapon::ANightmareWeapon() 
 	: Super(), bIsInstantDamageWeapon(false)
 {
-	Sprite = CreateOptionalDefaultSubobject<UPaperSpriteComponent>(TEXT("Sprite"));
-	if (Sprite)
-	{
-		Sprite->AlwaysLoadOnClient = true;
-		Sprite->AlwaysLoadOnServer = true;
-		Sprite->bOwnerNoSee = false;
-		Sprite->bAffectDynamicIndirectLighting = true;
-		Sprite->PrimaryComponentTick.TickGroup = TG_PrePhysics;
-		Sprite->AttachParent = GetRootComponent();
-		static FName CollisionProfileName(TEXT("OverlapAllDynamic"));
-		Sprite->SetCollisionProfileName(CollisionProfileName);
-		Sprite->bGenerateOverlapEvents = true;
-	}
+
 }
 
 void ANightmareWeapon::FireHit()

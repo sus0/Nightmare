@@ -41,9 +41,6 @@ class NIGHTMARE_API ANightmareWeapon : public ANightmareInventory
 public:
 	ANightmareWeapon();
 
-	UPROPERTY(Category = Weapon, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UPaperSpriteComponent* Sprite;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MuzzleFlash)
 	UParticleSystem* MuzzleFlash;
 

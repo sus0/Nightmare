@@ -3,34 +3,29 @@
 #pragma once
 
 #include "PaperCharacter.h"
+#include "NightmareTypes.h"
 #include "NightmarePawn.generated.h"
 
-class ANightmareWeapon;
+class ANightmareInventory;
 /**
  * 
  */
-UCLASS()
+UCLASS(Config = Game)
 class NIGHTMARE_API ANightmarePawn : public APaperCharacter
 {
 	GENERATED_BODY()
-
 public:
 	ANightmarePawn();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon)
-	FName WeaponSocketAttach;
-
-	UPROPERTY(Transient)
-	ANightmareWeapon* Weapon;
-
-	UFUNCTION(BlueprintCallable, Category = Weapon)
-	void FireWeapon();
-	UFUNCTION(BlueprintCallable, Category = Weapon)
-	void EquipWeapon(ANightmareWeapon* NewWeapon);
-	UFUNCTION(BlueprintCallable, Category = Weapon)
-	FName GetWeaponSocketName() const { return WeaponSocketAttach; }
+	virtual void TakeInventory(ANightmareInventory* Inventory);
 	
-	//void UnEquipWeapon();
-	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+	virtual void UpdateAnimation();
 
+	UPROPERTY(EditDefaultsOnly, Category = Animation)
+	class UPawnFlipbookList* PawnFlipbookList;
+	int GetHealth() const { return Health; }
+protected:
+	//UPROPERTY(Config, EditDefaultOnly)
+	static const int TotalHealth = 100;
+	int Health;
 };
