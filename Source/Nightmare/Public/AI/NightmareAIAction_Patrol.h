@@ -15,4 +15,7 @@ class NIGHTMARE_API UNightmareAIAction_Patrol : public UNightmareAIAction
 	
 public:
 	virtual bool TickAIAction(float DeltaTime) override;
+	virtual void ExecuteAIAction() override;
+private:
+	FVector Destination;
 };

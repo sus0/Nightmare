@@ -15,7 +15,8 @@ class NIGHTMARE_API UNightmareAIAction : public UObject
 	GENERATED_BODY()
 public:
 	virtual bool TickAIAction(float DeltaTime);
+	virtual void ExecuteAIAction();
 	void SetController(ANightmareAIController* InController);
-private:
+protected:
 	TWeakObjectPtr<ANightmareAIController>	MyAIController;
 };

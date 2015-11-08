@@ -14,3 +14,6 @@ void UNightmareAIAction::SetController(ANightmareAIController* InController)
 	MyAIController = InController;
 }
 
+void UNightmareAIAction::ExecuteAIAction()
+{
+}

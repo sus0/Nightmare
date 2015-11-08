@@ -6,6 +6,7 @@
 #include "NightmareAIController.generated.h"
 
 class UNightmareAIAction;
+class UNightmareAISensingComponent;
 /**
  * 
  */
@@ -15,6 +16,7 @@ class NIGHTMARE_API ANightmareAIController : public AAIController
 	GENERATED_BODY()
 public:
 	ANightmareAIController();
+
 	// AActor interface - begin
 	virtual void Tick(float DeltaTime) override;
 	// AActor interface - end
@@ -24,8 +26,13 @@ public:
 	virtual void UnPossess() override;
 	// AController interface - end
 
+	virtual void SenseAndSelectTartget();
 protected:
+	virtual void PickNewAction();
+	virtual void ConstructStandardActions();
+	
 	UNightmareAIAction* CurrentAction;
-	TArray<TSubclassOf<UNightmareAIAction>> AllowedActions;
+	TArray<TSubclassOf<UNightmareAIAction>> StandardActions;
 	TArray<UNightmareAIAction*> AllActions;
+	UNightmareAISensingComponent* SensingComponent;
 };
