@@ -4,10 +4,22 @@
 #include "NightmarePawn.h"
 #include "NightmareAIController.h"
 #include "NightmareAIAction.h"
-//ANightmareAIController::ANightmareAIController : Super()
-//{
-//
-//}
+#include "NightmareAIAction_Patrol.h"
+
+ANightmareAIController::ANightmareAIController() : Super()
+{
+	AllowedActions.Add(UNightmareAIAction_Patrol::StaticClass());
+}
+
+void ANightmareAIController::Possess(APawn* inPawn)
+{
+	Super::Possess(inPawn);
+}
+
+void ANightmareAIController::UnPossess()
+{
+	Super::UnPossess();
+}
 
 void ANightmareAIController::Tick(float DeltaTime)
 {

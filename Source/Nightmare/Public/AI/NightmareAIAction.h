@@ -5,7 +5,7 @@
 #include "Object.h"
 #include "NightmareAIAction.generated.h"
 
-class AStrategyAIController;
+class ANightmareAIController;
 /**
  * 
  */
@@ -15,6 +15,7 @@ class NIGHTMARE_API UNightmareAIAction : public UObject
 	GENERATED_BODY()
 public:
 	virtual bool TickAIAction(float DeltaTime);
+	void SetController(ANightmareAIController* InController);
 private:
-	TWeakObjectPtr<AStrategyAIController>	MyAIController;
+	TWeakObjectPtr<ANightmareAIController>	MyAIController;
 };

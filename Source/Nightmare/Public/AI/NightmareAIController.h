@@ -14,10 +14,18 @@ class NIGHTMARE_API ANightmareAIController : public AAIController
 {
 	GENERATED_BODY()
 public:
-	//ANightmareAIController();
+	ANightmareAIController();
+	// AActor interface - begin
 	virtual void Tick(float DeltaTime) override;
+	// AActor interface - end
 
+	// AController interface - begin
+	virtual void Possess(APawn* inPawn) override;
+	virtual void UnPossess() override;
+	// AController interface - end
 
 protected:
 	UNightmareAIAction* CurrentAction;
+	TArray<TSubclassOf<UNightmareAIAction>> AllowedActions;
+	TArray<UNightmareAIAction*> AllActions;
 };
