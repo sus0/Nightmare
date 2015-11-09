@@ -10,6 +10,7 @@ class UNightmareAISensingComponent;
 /**
  * 
  */
+
 UCLASS()
 class NIGHTMARE_API ANightmareAIController : public AAIController
 {
@@ -24,13 +25,14 @@ public:
 	// AController interface - begin
 	virtual void Possess(APawn* inPawn) override;
 	virtual void UnPossess() override;
+	virtual void OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result) override;
 	// AController interface - end
 
 	virtual void SenseAndSelectTartget();
 protected:
-	virtual void PickNewAction();
+	virtual UNightmareAIAction* PickBestAction();
 	virtual void ConstructStandardActions();
-	
+
 	UNightmareAIAction* CurrentAction;
 	TArray<TSubclassOf<UNightmareAIAction>> StandardActions;
 	TArray<UNightmareAIAction*> AllActions;

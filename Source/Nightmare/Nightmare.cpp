@@ -7,3 +7,4 @@ IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Nightmare, "Nightmare" );
 
 DEFINE_LOG_CATEGORY(NightmarePawn);
 DEFINE_LOG_CATEGORY(NightmareWeapon);
+DEFINE_LOG_CATEGORY(NightmareAI);

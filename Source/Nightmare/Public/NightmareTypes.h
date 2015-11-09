@@ -17,5 +17,16 @@ enum class EAnimationStates : uint8
 		ATTACKING,
 		MAX
 };
-
+ 
+// The order reflects priorities
+namespace EAIActionTypes
+{
+	UENUM(BlueprintType)
+	enum Type
+	{
+		AI_Default,
+		AI_Patrol,
+		AI_Attack
+	};
+}
 

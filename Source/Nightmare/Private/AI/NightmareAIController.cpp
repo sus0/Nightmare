@@ -68,18 +68,39 @@ void ANightmareAIController::Tick(float DeltaTime)
 
 	Super::Tick(DeltaTime);
 
-	if (CurrentAction != nullptr && !CurrentAction->TickAIAction(DeltaTime))
+	UNightmareAIAction* NewAction = PickBestAction();
+	
+	if (NewAction != nullptr)
 	{
-		// Abort this action
-		CurrentAction = nullptr;
+		// If we just finished the previous action
+		if (CurrentAction == nullptr)
+		{
+			CurrentAction = NewAction;
+			CurrentAction->ExecuteAIAction();
+		}
+		else if (CurrentAction != nullptr && CurrentAction->GetAIActionPriority() < NewAction->GetAIActionPriority())
+		{
+			if (CurrentAction->IsSafeToAbort())
+			{
+				CurrentAction->AbortAction();
+				CurrentAction = NewAction;
+				CurrentAction->ExecuteAIAction();
+			}
+		}
 	}
-	// Set up new action
-	if (true)
-	{
-		PickNewAction();
-	}
-	// What to do next?
-	SenseAndSelectTartget();
+
+	//if (CurrentAction != nullptr && !CurrentAction->TickAIAction(DeltaTime))
+	//{
+	//	// Abort this action
+	//	CurrentAction = nullptr;
+	//}
+	//// Set up new action
+	//if (true)
+	//{
+	//	PickNewAction();
+	//}
+	//// What to do next?
+	//SenseAndSelectTartget();
 }
 
 void ANightmareAIController::SenseAndSelectTartget()
@@ -87,14 +108,30 @@ void ANightmareAIController::SenseAndSelectTartget()
 
 }
 
-void ANightmareAIController::PickNewAction()
+UNightmareAIAction* ANightmareAIController::PickBestAction()
 {
+	UNightmareAIAction* BestAction = nullptr;
 	for (auto Action : AllActions)
 	{
-		if (CurrentAction == Action)
+		BestAction = Action;
+	}
+	return BestAction;
+}
+
+void ANightmareAIController::OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result)
+{
+	Super::OnMoveCompleted(RequestID, Result);
+	if (CurrentAction != nullptr)
+	{
+		if (Result == EPathFollowingResult::Aborted)
 		{
-
+			UE_LOG(NightmareAI, Warning, TEXT("Nightmare AI Action %s failed."), *CurrentAction->GetName());
 		}
-
+		CurrentAction->OnActionComplete();
+		CurrentAction = nullptr;
+	}
+	else
+	{
+		UE_LOG(NightmareAI, Warning, TEXT("Nightmare AI Action finished but was set back to nullptr somewhere else."));
 	}
 }

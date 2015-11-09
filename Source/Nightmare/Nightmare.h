@@ -6,3 +6,4 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(NightmarePawn, Log, All);
 DECLARE_LOG_CATEGORY_EXTERN(NightmareWeapon, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(NightmareAI, Log, All);

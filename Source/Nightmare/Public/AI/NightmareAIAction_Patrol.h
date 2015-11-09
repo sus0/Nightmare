@@ -14,8 +14,14 @@ class NIGHTMARE_API UNightmareAIAction_Patrol : public UNightmareAIAction
 	GENERATED_BODY()
 	
 public:
+	UNightmareAIAction_Patrol();
+	virtual int GetAIActionPriority() const override;
 	virtual bool TickAIAction(float DeltaTime) override;
+	virtual void AbortAction() override;
 	virtual void ExecuteAIAction() override;
+	virtual void OnActionComplete() override;
 private:
 	FVector Destination;
+private:
+	bool bIsExecuting;
 };

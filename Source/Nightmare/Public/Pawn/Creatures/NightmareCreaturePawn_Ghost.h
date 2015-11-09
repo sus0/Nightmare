@@ -12,7 +12,8 @@ UCLASS()
 class NIGHTMARE_API ANightmareCreaturePawn_Ghost : public ANightmareCreaturePawn
 {
 	GENERATED_BODY()
-	
+public:
+	ANightmareCreaturePawn_Ghost();
 	
 	
 	
