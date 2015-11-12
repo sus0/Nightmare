@@ -10,6 +10,10 @@ ANightmareGameMode::ANightmareGameMode() : Super()
 	DefaultPawnClass = ANightmareHumanPawn::StaticClass();
 	GameStateClass = AGameState::StaticClass();
 	HUDClass = AHUD::StaticClass();
+	// Min
+	VerticalGameBorder.X = 0.f;
+	// Max
+	VerticalGameBorder.Y = 1000.f;
 }
 
 void ANightmareGameMode::BeginPlay()
@@ -30,10 +34,7 @@ void ANightmareGameMode::BeginPlay()
 		//FVector MyScale = LocalController->GetControlledPawn()->ActorToWorld().GetScale3D();
 		//LocalController->DeprojectScreenPositionToWorld(0.f, 0.f, WorldLocLowerLeftCorner, Dummy);
 		//LocalController->DeprojectScreenPositionToWorld(0.f, ViewportSize.Y, WorldLocUpperLeftCorner, Dummy);
-		// Min
-		VerticalGameBorder.X = 1000.f;
-		// Max
-		VerticalGameBorder.Y = 0.f;
+
 	}
 }
 

@@ -35,5 +35,6 @@ public:
 
 
 private:
+	UPROPERTY()
 	ANightmarePawn*  InventoryOwner;
 };

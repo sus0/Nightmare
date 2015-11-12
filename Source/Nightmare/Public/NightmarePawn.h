@@ -23,9 +23,12 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Animation)
 	class UPawnFlipbookList* PawnFlipbookList;
+	
 	int GetHealth() const { return Health; }
+
 protected:
 	//UPROPERTY(Config, EditDefaultOnly)
 	static const int TotalHealth = 100;
+	
 	int Health;
 };

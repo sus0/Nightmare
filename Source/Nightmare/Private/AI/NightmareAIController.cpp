@@ -14,6 +14,7 @@ ANightmareAIController::ANightmareAIController() : Super()
 	// Construct Allowed Actions
 	ConstructStandardActions();
 	CurrentAction = nullptr;
+	AllActions.Reserve(2);
 	// Currently does nothing - we are deaf for now
 	SensingComponent = CreateDefaultSubobject<UNightmareAISensingComponent>(TEXT("Sensing Component"));
 }
@@ -57,7 +58,6 @@ void ANightmareAIController::InitialzieMovement(APawn* InPawn)
 		UCharacterMovementComponent* PawnMovement = CreaturePawn->GetCharacterMovement();
 		if (PawnMovement != nullptr)
 		{
-			PawnMovement->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
 			PawnMovement->SetMovementMode(MOVE_Flying);
 		}
 	}
@@ -74,14 +74,20 @@ void ANightmareAIController::Tick(float DeltaTime)
 	ANightmarePawn* MyPawn = Cast<ANightmarePawn>(GetPawn());
 	if (MyPawn == nullptr || MyPawn->GetHealth() < 0.f)
 	{
+		SetActorTickEnabled(false);
 		return;
 	}
 
 	Super::Tick(DeltaTime);
 
 	UNightmareAIAction* NewAction = PickBestAction();
-	
-	if (NewAction != nullptr)
+
+	if (!NewAction->IsValidLowLevel())
+	{
+		UE_LOG( NightmareAI, Warning, TEXT("My action suddenly becomes invlid at %f"), GetWorld()->GetTimeSeconds());
+	}
+
+	if (NewAction != nullptr && NewAction->IsValidLowLevel())
 	{
 		// If we just finished the previous action
 		if (CurrentAction == nullptr || !CurrentAction->IsValidLowLevelFast())

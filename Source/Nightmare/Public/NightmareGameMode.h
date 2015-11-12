@@ -20,5 +20,6 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, Category = Borders)
 	FVector2D VerticalGameBorder;
+
 	FVector2D GetVerticalViewportBorder() const { return VerticalGameBorder; }
 };

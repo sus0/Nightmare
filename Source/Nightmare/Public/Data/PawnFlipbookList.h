@@ -28,6 +28,7 @@ class NIGHTMARE_API UPawnFlipbookList : public UDataAsset
 	GENERATED_BODY()
 public:
 	UPawnFlipbookList(const FObjectInitializer& ObjectInitializer);
+	
 	UPROPERTY(EditAnywhere,Category = Animations)
 	TArray<FPawnFlipbookEntry> PawnFlipBooks;
 	

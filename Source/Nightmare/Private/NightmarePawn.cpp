@@ -10,6 +10,11 @@ ANightmarePawn::ANightmarePawn() :
 	Super(),
 	Health(100)
 {
+	UCharacterMovementComponent* PawnMovement = GetCharacterMovement();
+	ensure(PawnMovement != nullptr);
+	PawnMovement->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
+	PawnMovement->bConstrainToPlane = true;
+
 	if (PawnFlipbookList != nullptr)
 	{
 		PawnFlipbookList->InitMap();

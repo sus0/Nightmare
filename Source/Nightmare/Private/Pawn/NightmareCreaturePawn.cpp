@@ -27,19 +27,32 @@ FVector ANightmareCreaturePawn::GeneratePatrolDestination() const
 {
 	const FVector Origin = PatrolRegion->GetComponentTransform().GetLocation();
 	const FVector BoxExtent = PatrolRegion->GetScaledBoxExtent();
-	const FVector RegionMin = Origin - BoxExtent;
-	const FVector RegionMax = Origin + BoxExtent;
-	FVector Result = FMath::RandPointInBox(FBox(RegionMin, RegionMax));
-	// This is a 2D game and thus we don't care about Y
-	Result.Y = 0.f;
+	FVector RegionMin = Origin - BoxExtent;
+	FVector RegionMax = Origin + BoxExtent;
+	FVector Result = FVector::ZeroVector;
 
 	ANightmareGameMode* CurrGameMomde = Cast<ANightmareGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+
 	if (CurrGameMomde != nullptr)
 	{
 		FVector2D VerticalRange = CurrGameMomde->GetVerticalViewportBorder();
-		Result.Z = FMath::Clamp(Result.Z, VerticalRange.X, VerticalRange.Y);
+		// Check if we are too close to border
+		if (RegionMax.Z > VerticalRange.Y)
+		{
+			RegionMax = Origin + FVector(BoxExtent.X, BoxExtent.Y, 0.f);
+		}
+		else if (RegionMin.Z < VerticalRange.X)
+		{
+			RegionMin = Origin - FVector(BoxExtent.X, BoxExtent.Y, 0.f);
+		}
+		Result = FMath::RandPointInBox(FBox(RegionMin, RegionMax));
 	}
-
+	else
+	{
+		UE_LOG(NightmarePawn, Warning, TEXT("Bad Destination returning"));
+	}
+	// This is a 2D game and thus we don't care about Y
+	Result.Y = 0.f;
 	return Result;
 }
 

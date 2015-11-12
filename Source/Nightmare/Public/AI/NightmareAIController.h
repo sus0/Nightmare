@@ -33,9 +33,16 @@ public:
 protected:
 	virtual UNightmareAIAction* PickBestAction();
 	virtual void ConstructStandardActions();
-
+	
+	UPROPERTY()
 	UNightmareAIAction* CurrentAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AIController)
 	TArray<TSubclassOf<UNightmareAIAction>> StandardActions;
+	
+	UPROPERTY()
 	TArray<UNightmareAIAction*> AllActions;
+	
+	UPROPERTY()
 	UNightmareAISensingComponent* SensingComponent;
 };

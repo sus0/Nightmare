@@ -23,5 +23,6 @@ public:
 
 	void SetController(ANightmareAIController* InController);
 protected:
+	UPROPERTY()
 	TWeakObjectPtr<ANightmareAIController>	MyAIController;
 };

@@ -45,12 +45,18 @@ public:
 
 protected:
 	// Inputs - begin
+	UPROPERTY()
 	float HorizontalMovementInput;
+	
+	UPROPERTY()
 	bool bIsJumping;
+	
 	void MoveRight(float AxisValue);
 	void OnBeginJump();
 	void OnEndJump();
 	// Inputs - end
+	
+	UPROPERTY()
 	EAnimationStates CurrentAnimState;
 	
 };
