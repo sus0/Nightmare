@@ -3,9 +3,9 @@
 #include "Nightmare.h"
 #include "NightmareTypes.h"
 #include "Pawn/NightmareCreaturePawn.h"
-#include "NightmareAIController.h"
-#include "NightmareAIAction.h"
-#include "NightmareAIAction_Patrol.h"
+#include "AI/NightmareAIController.h"
+#include "AI/NightmareAIAction.h"
+#include "AI/NightmareAIAction_Patrol.h"
 //#include "PathFollowingComponent.h"
 
 UNightmareAIAction_Patrol::UNightmareAIAction_Patrol() : Super()

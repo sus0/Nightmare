@@ -47,7 +47,7 @@ void ANightmareHumanPawn::UpdateAnimation()
 
 	if (NewState != CurrentAnimState)
 	{
-		if (GetSprite()->SetFlipbook(PawnFlipbookList->FindFlipbook(NewState)))
+		if (PawnFlipbookList != nullptr && GetSprite()->SetFlipbook(PawnFlipbookList->FindFlipbook(NewState)))
 		{
 			CurrentAnimState = NewState;
 		}

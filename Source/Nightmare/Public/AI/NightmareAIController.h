@@ -28,6 +28,7 @@ public:
 	virtual void OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result) override;
 	// AController interface - end
 
+	virtual void InitialzieMovement(APawn* InPawn);
 	virtual void SenseAndSelectTartget();
 protected:
 	virtual UNightmareAIAction* PickBestAction();

@@ -2,6 +2,7 @@
 
 #include "Nightmare.h"
 #include "Pawn/NightmareCreaturePawn.h"
+#include "NightmareGameMode.h"
 
 ANightmareCreaturePawn::ANightmareCreaturePawn() : Super()
 {
@@ -31,6 +32,14 @@ FVector ANightmareCreaturePawn::GeneratePatrolDestination() const
 	FVector Result = FMath::RandPointInBox(FBox(RegionMin, RegionMax));
 	// This is a 2D game and thus we don't care about Y
 	Result.Y = 0.f;
+
+	ANightmareGameMode* CurrGameMomde = Cast<ANightmareGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (CurrGameMomde != nullptr)
+	{
+		FVector2D VerticalRange = CurrGameMomde->GetVerticalViewportBorder();
+		Result.Z = FMath::Clamp(Result.Z, VerticalRange.X, VerticalRange.Y);
+	}
+
 	return Result;
 }
 

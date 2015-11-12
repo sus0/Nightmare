@@ -7,10 +7,11 @@
 #include "AI/NightmareAIAction_Patrol.h"
 #include "AI/NightmareAISensingComponent.h"
 #include "Pawn/NightmareCreaturePawn.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 ANightmareAIController::ANightmareAIController() : Super()
 {
-	// Contruct Allowed Actions
+	// Construct Allowed Actions
 	ConstructStandardActions();
 	CurrentAction = nullptr;
 	// Currently does nothing - we are deaf for now
@@ -36,12 +37,7 @@ void ANightmareAIController::Possess(APawn* inPawn)
 		Action->SetController(this);
 		AllActions.Add(Action);
 	}
-	ANightmareCreaturePawn* CreaturePawn = Cast<ANightmareCreaturePawn>(GetPawn());
-	if (CreaturePawn != nullptr && CreaturePawn->GetCharacterMovement() != nullptr)
-	{
-		CreaturePawn->GetCharacterMovement()->SetMovementMode(MOVE_Flying);
-	}
-
+	InitialzieMovement(GetPawn());
 	// Hack to test
 	CurrentAction = AllActions[0];
 	if (CurrentAction != nullptr)
@@ -51,6 +47,21 @@ void ANightmareAIController::Possess(APawn* inPawn)
 
 	// Start ticking
 	SetActorTickEnabled(true);
+}
+
+void ANightmareAIController::InitialzieMovement(APawn* InPawn)
+{
+	ANightmareCreaturePawn* CreaturePawn = Cast<ANightmareCreaturePawn>(InPawn);
+	if (CreaturePawn != nullptr)
+	{
+		UCharacterMovementComponent* PawnMovement = CreaturePawn->GetCharacterMovement();
+		if (PawnMovement != nullptr)
+		{
+			PawnMovement->SetPlaneConstraintAxisSetting(EPlaneConstraintAxisSetting::Y);
+			PawnMovement->SetMovementMode(MOVE_Flying);
+		}
+	}
+
 }
 
 void ANightmareAIController::UnPossess()
@@ -73,12 +84,12 @@ void ANightmareAIController::Tick(float DeltaTime)
 	if (NewAction != nullptr)
 	{
 		// If we just finished the previous action
-		if (CurrentAction == nullptr)
+		if (CurrentAction == nullptr || !CurrentAction->IsValidLowLevelFast())
 		{
 			CurrentAction = NewAction;
 			CurrentAction->ExecuteAIAction();
 		}
-		else if (CurrentAction != nullptr && CurrentAction->GetAIActionPriority() < NewAction->GetAIActionPriority())
+		else if (CurrentAction->GetAIActionPriority() < NewAction->GetAIActionPriority())
 		{
 			if (CurrentAction->IsSafeToAbort())
 			{
