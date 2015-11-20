@@ -28,7 +28,11 @@ public:
 	virtual void OnMoveCompleted(FAIRequestID RequestID, EPathFollowingResult::Type Result) override;
 	// AController interface - end
 
-	virtual void InitialzieMovement(APawn* InPawn);
+	// Called wht our AI sees an enemy pawn
+	virtual void OnSeeEnemyPawn(APawn* Pawn);
+
+	virtual void InitializeMovement();
+	virtual void InitializeSensing();
 	virtual void SenseAndSelectTartget();
 protected:
 	virtual UNightmareAIAction* PickBestAction();
@@ -45,4 +49,5 @@ protected:
 	
 	UPROPERTY()
 	UNightmareAISensingComponent* SensingComponent;
+
 };

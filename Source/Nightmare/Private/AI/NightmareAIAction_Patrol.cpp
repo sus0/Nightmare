@@ -31,9 +31,9 @@ void UNightmareAIAction_Patrol::ExecuteAIAction()
 	bIsExecuting = true;
 }
 
-int UNightmareAIAction_Patrol::GetAIActionPriority() const
+uint8 UNightmareAIAction_Patrol::GetAIActionPriority() const
 {
-	return static_cast<int>(EAIActionTypes::AI_Patrol);
+	return EAIActionTypes::AI_Patrol;
 }
 
 void UNightmareAIAction_Patrol::OnActionComplete()
@@ -43,5 +43,16 @@ void UNightmareAIAction_Patrol::OnActionComplete()
 
 void UNightmareAIAction_Patrol::AbortAction()
 {
+	check(MyAIController.IsValid());
+	Super::AbortAction();
+
 	bIsExecuting = false;
+	Destination = FVector::ZeroVector;
+
+	if (MyAIController->GetPathFollowingComponent())
+	{
+		FString ControlledPawnName = (MyAIController->GetPawn() != nullptr) ? "Unknown Pawn" : (MyAIController->GetPawn()->GetName());
+		FString Message = ControlledPawnName + (" abort Patrolling Action.");
+		MyAIController->GetPathFollowingComponent()->AbortMove(Message);
+	}
 }

@@ -3,6 +3,7 @@
 #include "Nightmare.h"
 #include "NightmareGameMode.h"
 #include "Pawn/NightmareHumanPawn.h"
+#include "NightmarePawn.h"
 
 ANightmareGameMode::ANightmareGameMode() : Super()
 {
@@ -38,4 +39,12 @@ void ANightmareGameMode::BeginPlay()
 	}
 }
 
+bool ANightmareGameMode::OnSameTeam(const AActor* ActorA, const AActor* ActorB)
+{
+	const ANightmarePawn* PawnA = Cast<ANightmarePawn>(ActorA);
+	const ANightmarePawn* PawnB = Cast<ANightmarePawn>(ActorB);
 
+	return (PawnA != nullptr && PawnB != nullptr
+		&& PawnA->GetTeamNum() == PawnB->GetTeamNum()
+		&& PawnA->GetTeamNum() != ENightmareTeam::Team_Default);
+}

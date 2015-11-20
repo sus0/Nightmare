@@ -14,7 +14,7 @@ class NIGHTMARE_API UNightmareAIAction : public UObject
 {
 	GENERATED_BODY()
 public:
-	virtual int GetAIActionPriority() const;
+	virtual uint8 GetAIActionPriority() const;
 	virtual bool TickAIAction(float DeltaTime);
 	virtual void ExecuteAIAction();
 	virtual bool IsSafeToAbort();

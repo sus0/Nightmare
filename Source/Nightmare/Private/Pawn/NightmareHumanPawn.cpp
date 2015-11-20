@@ -123,3 +123,8 @@ void ANightmareHumanPawn::TakeInventory(ANightmareInventory* Inventory)
 		}
 	}
 }
+
+uint8 ANightmareHumanPawn::GetTeamNum() const
+{
+	return ENightmareTeam::Team_Human;
+}

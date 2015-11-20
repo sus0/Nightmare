@@ -22,4 +22,7 @@ public:
 	FVector2D VerticalGameBorder;
 
 	FVector2D GetVerticalViewportBorder() const { return VerticalGameBorder; }
+
+	static bool OnSameTeam(const AActor* ActorA, const AActor* ActorB);
+
 };

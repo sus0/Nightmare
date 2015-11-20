@@ -30,3 +30,13 @@ namespace EAIActionTypes
 	};
 }
 
+namespace ENightmareTeam
+{
+	UENUM(BlueprintType)
+	enum Type
+	{
+		Team_Default,
+		Team_Human,
+		Team_Creature
+	};
+}

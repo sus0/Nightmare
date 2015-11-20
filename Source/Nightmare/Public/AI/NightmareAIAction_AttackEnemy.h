@@ -3,19 +3,17 @@
 #pragma once
 
 #include "AI/NightmareAIAction.h"
-#include "NightmareAIAction_Patrol.generated.h"
+#include "NightmareAIAction_AttackEnemy.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class NIGHTMARE_API UNightmareAIAction_Patrol : public UNightmareAIAction
+class NIGHTMARE_API UNightmareAIAction_AttackEnemy : public UNightmareAIAction
 {
 	GENERATED_BODY()
-	
 public:
-	UNightmareAIAction_Patrol();
-
+	UNightmareAIAction_AttackEnemy();
 	// Begin UNightmareAIAction Interface
 	virtual uint8 GetAIActionPriority() const override;
 	virtual bool TickAIAction(float DeltaTime) override;
@@ -23,9 +21,5 @@ public:
 	virtual void ExecuteAIAction() override;
 	virtual void OnActionComplete() override;
 	// End UNightmareAIAction Interface
-
-private:
-	FVector Destination;
-private:
-	bool bIsExecuting;
+	
 };

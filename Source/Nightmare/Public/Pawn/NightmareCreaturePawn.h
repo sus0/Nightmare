@@ -14,8 +14,10 @@ class NIGHTMARE_API ANightmareCreaturePawn : public ANightmarePawn
 	GENERATED_BODY()
 public:
 	ANightmareCreaturePawn();
+
+	virtual uint8 GetTeamNum() const final;
+
 	UPROPERTY(Category = Actions, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UBoxComponent* PatrolRegion;
-	
 	FVector GeneratePatrolDestination() const;
 };

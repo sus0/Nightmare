@@ -56,3 +56,7 @@ FVector ANightmareCreaturePawn::GeneratePatrolDestination() const
 	return Result;
 }
 
+uint8 ANightmareCreaturePawn::GetTeamNum() const
+{
+	return ENightmareTeam::Team_Creature;
+}

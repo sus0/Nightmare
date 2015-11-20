@@ -19,9 +19,9 @@ void UNightmareAIAction::ExecuteAIAction()
 {
 }
 
-int UNightmareAIAction::GetAIActionPriority() const
+uint8 UNightmareAIAction::GetAIActionPriority() const
 {
-	return static_cast<int>(EAIActionTypes::AI_Default);
+	return EAIActionTypes::AI_Default;
 }
 
 bool UNightmareAIAction::IsSafeToAbort()

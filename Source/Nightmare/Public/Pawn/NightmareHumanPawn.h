@@ -43,6 +43,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	virtual uint8 GetTeamNum() const final;
 protected:
 	// Inputs - begin
 	UPROPERTY()

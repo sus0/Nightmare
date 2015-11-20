@@ -2,12 +2,15 @@
 
 #include "Nightmare.h"
 #include "NightmarePawn.h"
-#include "NightmareWeapon.h"
-#include "PawnFlipbookList.h"
+#include "Weapon/NightmareWeapon.h"
+#include "Data/PawnFlipbookList.h"
 #include "PaperFlipbookComponent.h"
 
 ANightmarePawn::ANightmarePawn() : 
 	Super(),
+	SightRadius(0.f),
+	SensingTimeInterval(0.f),
+	PeripheralVisionAngle(0.f),
 	Health(100)
 {
 	UCharacterMovementComponent* PawnMovement = GetCharacterMovement();
@@ -25,6 +28,10 @@ void ANightmarePawn::UpdateAnimation()
 {
 }
 
+uint8 ANightmarePawn::GetTeamNum() const
+{
+	return ENightmareTeam::Team_Default;
+}
 
 //
 //float ANightmarePawn::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)

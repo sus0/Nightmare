@@ -38,7 +38,9 @@ void ANightmareAIController::Possess(APawn* inPawn)
 		Action->SetController(this);
 		AllActions.Add(Action);
 	}
-	InitialzieMovement(GetPawn());
+	InitializeMovement();
+	InitializeSensing();
+
 	// Hack to test
 	CurrentAction = AllActions[0];
 	if (CurrentAction != nullptr)
@@ -50,9 +52,26 @@ void ANightmareAIController::Possess(APawn* inPawn)
 	SetActorTickEnabled(true);
 }
 
-void ANightmareAIController::InitialzieMovement(APawn* InPawn)
+void ANightmareAIController::InitializeSensing()
 {
-	ANightmareCreaturePawn* CreaturePawn = Cast<ANightmareCreaturePawn>(InPawn);
+	ANightmarePawn* MyPawn = Cast<ANightmareCreaturePawn>(GetPawn());
+	if (SensingComponent != nullptr && MyPawn != nullptr)
+	{
+		SensingComponent->SightRadius = MyPawn->GetSightRadius();
+		SensingComponent->SetPeripheralVisionAngle(MyPawn->GetPeripheralVisionAngle());
+		SensingComponent->SetSensingInterval(MyPawn->GetSensingTimeInterval());
+		// bound timer handle
+		SensingComponent->OnSeePawn.AddUniqueDynamic(this, &ANightmareAIController::OnSeeEnemyPawn);
+	}
+	else
+	{
+		UE_LOG(NightmareAI, Error, TEXT("Nightmare AI failed to set up sensing component"));
+	}
+}
+
+void ANightmareAIController::InitializeMovement()
+{
+	ANightmareCreaturePawn* CreaturePawn = Cast<ANightmareCreaturePawn>(GetPawn());
 	if (CreaturePawn != nullptr)
 	{
 		UCharacterMovementComponent* PawnMovement = CreaturePawn->GetCharacterMovement();
@@ -61,7 +80,6 @@ void ANightmareAIController::InitialzieMovement(APawn* InPawn)
 			PawnMovement->SetMovementMode(MOVE_Flying);
 		}
 	}
-
 }
 
 void ANightmareAIController::UnPossess()
@@ -150,5 +168,14 @@ void ANightmareAIController::OnMoveCompleted(FAIRequestID RequestID, EPathFollow
 	else
 	{
 		UE_LOG(NightmareAI, Warning, TEXT("Nightmare AI Action finished but was set back to nullptr somewhere else."));
+	}
+}
+
+void ANightmareAIController::OnSeeEnemyPawn(APawn* Pawn)
+{
+	ANightmarePawn* TargetPawn = Cast<ANightmarePawn>(Pawn);
+	if (TargetPawn != nullptr)
+	{
+
 	}
 }

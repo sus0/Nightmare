@@ -21,10 +21,25 @@ public:
 	
 	virtual void UpdateAnimation();
 
+	virtual uint8 GetTeamNum() const;
+
 	UPROPERTY(EditDefaultsOnly, Category = Animation)
 	class UPawnFlipbookList* PawnFlipbookList;
 	
 	int GetHealth() const { return Health; }
+
+	UPROPERTY(EditDefaultsOnly, Category = Sensing)
+	float SightRadius;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Sensing)
+	float PeripheralVisionAngle;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Sensing)
+	float SensingTimeInterval;
+
+	inline float GetSightRadius() const { return SightRadius; }
+	inline float GetPeripheralVisionAngle() const { return PeripheralVisionAngle; }
+	inline float GetSensingTimeInterval() const { return SensingTimeInterval; }
 
 protected:
 	//UPROPERTY(Config, EditDefaultOnly)
