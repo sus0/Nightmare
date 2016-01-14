@@ -171,9 +171,9 @@ void ANightmareAIController::OnMoveCompleted(FAIRequestID RequestID, EPathFollow
 	}
 }
 
-void ANightmareAIController::OnSeeEnemyPawn(APawn* Pawn)
+void ANightmareAIController::OnSeeEnemyPawn(APawn* SeenPawn)
 {
-	ANightmarePawn* TargetPawn = Cast<ANightmarePawn>(Pawn);
+	ANightmarePawn* TargetPawn = Cast<ANightmarePawn>(SeenPawn);
 	if (TargetPawn != nullptr)
 	{
 

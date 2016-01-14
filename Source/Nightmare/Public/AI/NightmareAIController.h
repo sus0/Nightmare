@@ -29,7 +29,8 @@ public:
 	// AController interface - end
 
 	// Called wht our AI sees an enemy pawn
-	virtual void OnSeeEnemyPawn(APawn* Pawn);
+	UFUNCTION()
+	virtual void OnSeeEnemyPawn(APawn* SeenPawn);
 
 	virtual void InitializeMovement();
 	virtual void InitializeSensing();
