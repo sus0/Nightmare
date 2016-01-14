@@ -2,7 +2,7 @@
 ##Description
 Nightmare is a 2D platformer adventure game.  Single player and multiplayer modes are both available.
 
-* Single-player: Growing up is never easy. Everyone has overcome some fear, in any form, when they are a kid. This is more about storytelling than a true adventure game, aiming to inspiring people to rcognize and accept themselves.
+* Single-player: Growing up is never easy. Everyone has overcome some fear, in any form, when they are a kid. This is more about storytelling than a true adventure game, aiming to inspire people to recognize and accept themselves.
 * Multiplayer: When the darkness falls in the ghost town, the mysterious creatures come out and hunt for fears. This is a battle between the little girl (the protagonist) and the dark creatures.
 The two players are placed into two teams- they either play the girl or one of the dark creatures.  
 
